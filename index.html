@@ -5,93 +5,198 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mobile Banking Simulation</title>
     <style>
-      /* styles.css */
-body {
-    font-family: Arial, sans-serif;
-    background-color: #f9f9f9;
-    color: #333;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-}
+        :root {
+            --primary-color: #1a73e8;
+            --secondary-color: #f8f9fa;
+            --error-color: #dc3545;
+            --success-color: #28a745;
+            --text-color: #202124;
+            --border-radius: 12px;
+            --box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+        }
 
-.app {
-    background: #fff;
-    border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    padding: 20px;
-    max-width: 400px;
-    width: 100%;
-}
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+        }
 
-h1 {
-    text-align: center;
-    color: #0056b3;
-}
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4e8eb 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
 
-form {
-    display: flex;
-    flex-direction: column;
-}
+        .app {
+            background: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            width: 100%;
+            max-width: 420px;
+            padding: 2rem;
+            position: relative;
+            overflow: hidden;
+        }
 
-label {
-    margin-top: 10px;
-    margin-bottom: 5px;
-    font-weight: bold;
-}
+        .app::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary-color), #64b5f6);
+        }
 
-input {
-    padding: 10px;
-    margin-bottom: 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-}
+        h1 {
+            color: var(--primary-color);
+            font-size: 1.75rem;
+            margin-bottom: 1.5rem;
+            text-align: center;
+            font-weight: 600;
+        }
 
-button {
-    padding: 10px;
-    background-color: #0056b3;
-    color: #fff;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-}
+        h2 {
+            color: var(--text-color);
+            font-size: 1.25rem;
+            margin-bottom: 1.5rem;
+            font-weight: 500;
+        }
 
-button:hover {
-    background-color: #003f7d;
-}
+        .form-group {
+            margin-bottom: 1.25rem;
+        }
 
-.hidden {
-    display: none;
-}
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--text-color);
+            font-weight: 500;
+            font-size: 0.95rem;
+        }
 
-.error {
-    color: red;
-    font-style: italic;
-    margin-top: 10px;
-}
+        input {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border: 2px solid #e0e0e0;
+            border-radius: var(--border-radius);
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
 
+        input:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(26, 115, 232, 0.1);
+        }
+
+        button {
+            width: 100%;
+            padding: 0.875rem;
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: var(--border-radius);
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 1rem;
+        }
+
+        button:hover {
+            background: #1557b0;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        button:active {
+            transform: translateY(0);
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        #transfer-section {
+            text-align: center;
+        }
+
+        .error {
+            color: var(--error-color);
+            font-size: 0.9rem;
+            margin-top: 1rem;
+            padding: 0.75rem;
+            background: rgba(220, 53, 69, 0.1);
+            border-radius: var(--border-radius);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .error::before {
+            content: '⚠️';
+            margin-right: 0.5rem;
+        }
+
+        .transition {
+            transition: all 0.3s ease-in-out;
+        }
+
+        @media (max-width: 480px) {
+            .app {
+                padding: 1.5rem;
+            }
+
+            h1 {
+                font-size: 1.5rem;
+            }
+
+            h2 {
+                font-size: 1.1rem;
+            }
+        }
     </style>
 </head>
 <body>
     <div class="app">
         <h1>Mobile Banking App</h1>
-        <div class="login-section">
-            <h2>Login</h2>
-            <form>
-                <label for="username">Username:</label>
-                <input type="text" id="username" placeholder="Enter username">
-                <label for="password">Password:</label>
-                <input type="password" id="password" placeholder="Enter password">
-                <button type="button" onclick="navigateToTransfer()">Login</button>
+        <div class="login-section transition">
+            <h2>Login to Your Account</h2>
+            <form id="loginForm">
+                <div class="form-group">
+                    <label for="username">Username</label>
+                    <input 
+                        type="text" 
+                        id="username" 
+                        placeholder="Enter your username"
+                        autocomplete="username"
+                        required
+                    >
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input 
+                        type="password" 
+                        id="password" 
+                        placeholder="Enter your password"
+                        autocomplete="current-password"
+                        required
+                    >
+                </div>
+                <button type="button" onclick="navigateToTransfer()">Sign In</button>
             </form>
         </div>
-        <div id="transfer-section" class="hidden">
+        <div id="transfer-section" class="hidden transition">
             <h2>Transfer Funds</h2>
+            <p style="margin-bottom: 1rem; color: #666;">
+                Quick and secure money transfers to any account
+            </p>
             <button onclick="transferFunds()">Transfer Funds</button>
-            <!-- <p id="message" class="error hidden">No action occurs when the button is tapped.</p> -->
         </div>
     </div>
     <script>
