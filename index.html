@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mobile Banking Simulation</title>
+    <style>
+      /* styles.css */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f9f9f9;
+    color: #333;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.app {
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    max-width: 400px;
+    width: 100%;
+}
+
+h1 {
+    text-align: center;
+    color: #0056b3;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+label {
+    margin-top: 10px;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+input {
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+button {
+    padding: 10px;
+    background-color: #0056b3;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #003f7d;
+}
+
+.hidden {
+    display: none;
+}
+
+.error {
+    color: red;
+    font-style: italic;
+    margin-top: 10px;
+}
+
+    </style>
+</head>
+<body>
+    <div class="app">
+        <h1>Mobile Banking App</h1>
+        <div class="login-section">
+            <h2>Login</h2>
+            <form>
+                <label for="username">Username:</label>
+                <input type="text" id="username" placeholder="Enter username">
+                <label for="password">Password:</label>
+                <input type="password" id="password" placeholder="Enter password">
+                <button type="button" onclick="navigateToTransfer()">Login</button>
+            </form>
+        </div>
+        <div id="transfer-section" class="hidden">
+            <h2>Transfer Funds</h2>
+            <button onclick="transferFunds()">Transfer Funds</button>
+            <!-- <p id="message" class="error hidden">No action occurs when the button is tapped.</p> -->
+        </div>
+    </div>
+    <script>
+        function navigateToTransfer() {
+            document.querySelector('.login-section').classList.add('hidden');
+            document.querySelector('#transfer-section').classList.remove('hidden');
+        }
+
+        function transferFunds() {
+            document.querySelector('#message').classList.remove('hidden');
+        }
+    </script>
+</body>
+</html>
